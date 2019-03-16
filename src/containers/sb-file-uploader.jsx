@@ -13,13 +13,8 @@ import {
     requestProjectUpload
 } from '../reducers/project-state';
 
-import {
-    openLoadingProject,
-    closeLoadingProject
-} from '../reducers/modals';
-import {
-    closeFileMenu
-} from '../reducers/menus';
+import { openLoadingProject, closeLoadingProject} from '../reducers/modals';
+import {closeFileMenu} from '../reducers/menus';
 
 /**
  * SBFileUploader component passes a file input, load handler and props to its child.

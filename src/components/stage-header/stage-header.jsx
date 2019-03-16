@@ -65,7 +65,7 @@ const StageHeaderComponent = function (props) {
 
     if (isFullScreen) {
         const stageDimensions = getStageDimensions(null, true);
-        const stageButton = showBranding ? (
+        const stageButton = //showBranding ? (
             <div className={styles.embedScratchLogo}>
                 <a
                     href="https://www.ponycody.com"
@@ -78,21 +78,21 @@ const StageHeaderComponent = function (props) {
                     />
                 </a>
             </div>
-        ) : (
-            <Button
-                className={styles.stageButton}
-                onClick={onSetStageUnFull}
-                onKeyPress={onKeyPress}
-            >
-                <img
-                    alt={props.intl.formatMessage(messages.unFullStageSizeMessage)}
-                    className={styles.stageButtonIcon}
-                    draggable={false}
-                    src={unFullScreenIcon}
-                    title={props.intl.formatMessage(messages.fullscreenControl)}
-                />
-            </Button>
-        );
+       // ) //: (
+        //     <Button
+        //         className={styles.stageButton}
+        //         onClick={onSetStageUnFull}
+        //         onKeyPress={onKeyPress}
+        //     >
+        //         <img
+        //             alt={props.intl.formatMessage(messages.unFullStageSizeMessage)}
+        //             className={styles.stageButtonIcon}
+        //             draggable={false}
+        //             src={unFullScreenIcon}
+        //             title={props.intl.formatMessage(messages.fullscreenControl)}
+        //         />
+        //     </Button>
+        // );
         header = (
             <Box className={styles.stageHeaderWrapperOverlay}>
                 <Box
@@ -189,7 +189,7 @@ StageHeaderComponent.propTypes = {
     onSetStageLarge: PropTypes.func.isRequired,
     onSetStageSmall: PropTypes.func.isRequired,
     onSetStageUnFull: PropTypes.func.isRequired,
-    showBranding: PropTypes.bool.isRequired,
+    //showBranding: PropTypes.bool.isRequired,
     stageSizeMode: PropTypes.oneOf(Object.keys(STAGE_SIZE_MODES)),
     vm: PropTypes.instanceOf(VM).isRequired
 };

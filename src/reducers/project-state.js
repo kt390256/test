@@ -415,13 +415,16 @@ const doneCreatingProject = (id, loadingState) => {
 };
 
 const onFetchedProjectData = (projectData, loadingState) => {
+    console.log("inside onFetchedProjectData:",projectData);
     switch (loadingState) {
     case LoadingState.FETCHING_WITH_ID:
+    console.log("case fetching with id");
         return {
             type: DONE_FETCHING_WITH_ID,
             projectData: projectData
         };
     case LoadingState.FETCHING_NEW_DEFAULT:
+    console.log("case fetching new default");
         return {
             type: DONE_FETCHING_DEFAULT,
             projectData: projectData
@@ -433,6 +436,7 @@ const onFetchedProjectData = (projectData, loadingState) => {
 
 const onLoadedProject = (loadingState, canSave, success) => {
     if (success) {
+        console.log("Project loaded")
         switch (loadingState) {
         case LoadingState.LOADING_VM_WITH_ID:
             return {

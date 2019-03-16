@@ -55,7 +55,7 @@ const cloudManagerHOC = function (WrappedComponent) {
             return !!(props.cloudHost && props.username && props.vm && props.projectId && props.hasCloudPermission);
         }
         shouldNotModifyCloudData (props) {
-            return (props.hasEverEnteredEditor && !props.canSave);
+            return (props.hasEverEnteredEditor /*&& !props.canSave*/);
         }
         shouldConnect (props) {
             return !this.isConnected() && this.canUseCloud(props) &&
@@ -124,7 +124,7 @@ const cloudManagerHOC = function (WrappedComponent) {
     }
 
     CloudManager.propTypes = {
-        canSave: PropTypes.bool.isRequired,
+        //canSave: PropTypes.bool.isRequired,
         cloudHost: PropTypes.string,
         hasCloudPermission: PropTypes.bool,
         hasEverEnteredEditor: PropTypes.bool,
