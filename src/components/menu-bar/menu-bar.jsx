@@ -247,7 +247,7 @@ class MenuBar extends React.Component {
     render () {
         const saveNowMessage = (
             <FormattedMessage
-                defaultMessage="Save now"
+                defaultMessage="Save you project"
                 description="Menu bar item for saving now"
                 id="gui.menuBar.saveNow"
             />

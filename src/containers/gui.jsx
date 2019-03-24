@@ -96,12 +96,11 @@ class GUI extends React.Component {
             loadingStateVisible,
             ...componentProps
         } = this.props;
+  
         return (
-            <GUIComponent
-                loading={fetchingProject || isLoading || loadingStateVisible}
-                {...componentProps}
-            >
-                {children}
+            <GUIComponent loading={fetchingProject || isLoading || loadingStateVisible}
+                          {...componentProps}>
+                          {children}
             </GUIComponent>
         );
     }

@@ -55,6 +55,7 @@ const messages = defineMessages({
 let isRendererSupported = null;
 
 const GUIComponent = props => {
+
     const {
         accountNavOpen,
         activeTabIndex,
@@ -117,6 +118,7 @@ const GUIComponent = props => {
         vm,
         ...componentProps
     } = omit(props, 'dispatch');
+
     if (children) {
         return <Box {...componentProps}>{children}</Box>;
     }
@@ -199,10 +201,7 @@ const GUIComponent = props => {
                     />
                 ) : null}
                 {backdropLibraryVisible ? (
-                    <BackdropLibrary
-                        vm={vm}
-                        onRequestClose={onRequestCloseBackdropLibrary}
-                    />
+                    <BackdropLibrary vm={vm} onRequestClose={onRequestCloseBackdropLibrary}/>
                 ) : null}
                 <MenuBar
                     accountNavOpen={accountNavOpen}

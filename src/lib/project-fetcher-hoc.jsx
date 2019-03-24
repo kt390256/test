@@ -258,12 +258,12 @@ const ProjectFetcherHOC = function (WrappedComponent) {
           
           }, (err, response) => {
             if(err) console.log(`err from ${__dir} line 78`,err);
-              console.log("unparse-succesfful");
+              //console.log("unparse-succesfful");
              // let temp = body.getJSONObject("projectData").getJSONObject("data");
               let content = JSON.parse(response.body);
 
               let input = new Uint8Array(content.projectData.data.data);
-              console.log(input);
+              //console.log(input);
               return this.props.onFetchedProjectData(input, loadingState);
           })
             }
@@ -271,8 +271,8 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 return storage
                 .load(storage.AssetType.Project, projectId, storage.DataFormat.JSON)
                 .then(projectAsset => {
-                    console.log(projectId);
-                    console.log("THis fucking shit inside hoc is called too");
+                    //console.log(projectId);
+                   // console.log("THis fucking shit inside hoc is called too");
                     if (projectAsset) {
                         this.props.onFetchedProjectData(projectAsset.data, loadingState);
                     } else {

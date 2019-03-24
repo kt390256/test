@@ -65,7 +65,7 @@ const addDividerClassToFirstChild = (child, id) => (
 
 const MenuSection = ({children}) => (
     <React.Fragment>{
-        React.Children.map(children, addDividerClassToFirstChild)
+      React.Children.map(children, addDividerClassToFirstChild)
     }</React.Fragment>
 );
 

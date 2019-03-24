@@ -16,6 +16,7 @@ class Menu extends React.Component {
     }
     componentDidMount () {
         if (this.props.open) this.addListeners();
+       // console.log("This is props:",this.props)
     }
     componentDidUpdate (prevProps) {
         if (this.props.open && !prevProps.open) this.addListeners();
@@ -38,6 +39,7 @@ class Menu extends React.Component {
     ref (c) {
         this.menu = c;
     }
+
     render () {
         const {
             open,
@@ -46,10 +48,7 @@ class Menu extends React.Component {
         } = this.props;
         if (!open) return null;
         return (
-            <MenuComponent
-                componentRef={this.ref}
-                {...props}
-            >
+            <MenuComponent componentRef={this.ref} {...props}>
                 {children}
             </MenuComponent>
         );
