@@ -22,6 +22,7 @@ import AuthorInfo from './author-info.jsx';
 import AccountNav from '../../containers/account-nav.jsx';
 import LoginDropdown from './login-dropdown.jsx';
 import SB3Downloader from '../../containers/sb3-downloader.jsx';
+import SaveToCloud from '../../containers/save-to-cloud.jsx';
 import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
 
@@ -350,9 +351,23 @@ class MenuBar extends React.Component {
                                 {(this.props.canSave || this.props.canCreateCopy || this.props.canRemix) && (
                                     <MenuSection>
                                         {this.props.canSave ? (
-                                            <MenuItem onClick={this.handleClickSave}>
-                                                {saveNowMessage}
-                                            </MenuItem>
+
+                                            <SaveToCloud>{(className, downloadProject) => (
+                                                <MenuItem
+                                                    className={className}
+                                                     onClick={this.handleCloseFileMenuAndThen(downloadProject)}
+                                                 >
+                                            <FormattedMessage
+                                                defaultMessage="Save your project"
+                                                description="save to AWS"
+                                                id="saveToAWS"
+                                            />
+                                                </MenuItem>
+                                            )}</SaveToCloud>
+
+                                            // <MenuItem onClick={this.handleClickSave}>
+                                            //     {saveNowMessage}
+                                            // </MenuItem>
                                         ) : []}
                                         {this.props.canCreateCopy ? (
                                             <MenuItem onClick={this.handleClickSaveAsCopy}>

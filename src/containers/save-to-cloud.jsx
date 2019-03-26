@@ -20,7 +20,7 @@ import axios from 'axios';
  *     />
  * )}</SB3Downloader>
  */
-class SB3Downloader extends React.Component {
+class SaveToCloud extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
@@ -32,6 +32,27 @@ class SB3Downloader extends React.Component {
         document.body.appendChild(downloadLink);
 
         this.props.saveProjectSb3().then(content => {
+            console.log("THis is content:", content)
+            if (this.props.onSaveFinished) {
+                this.props.onSaveFinished();
+            }
+
+            let project_data = {
+                projectName: this.props.ProjectFilename,
+                content: content
+            }
+
+            let formData = new FormData();
+            formData.append('myFile', content, "someshit.sb3");
+
+            axios.post('/save-to-cloud', formData, {
+               
+            })
+            .then(res => {console.log(response)})
+            .catch(err =>{console.log(err)})
+
+
+
 
             // Use special ms version if available to get it working on Edge.
             if (navigator.msSaveOrOpenBlob) {
@@ -39,14 +60,14 @@ class SB3Downloader extends React.Component {
                 return;
             }
 
-            const url = window.URL.createObjectURL(content);//create an url refer to the object
-           // console.log("url:", url);
-            downloadLink.href = url;
-            downloadLink.download = this.props.projectFilename;
-            //console.log("projectFIlename:", downloadLink.download);
-            downloadLink.click();//simulate a click
-            window.URL.revokeObjectURL(url);//destroy the reference that was used previously
-            document.body.removeChild(downloadLink);//remove the previously added downloadLink from the DOM
+            // const url = window.URL.createObjectURL(content);//create an url refer to the object
+            // console.log("url:", url);
+            // downloadLink.href = url;
+            // downloadLink.download = this.props.projectFilename;
+            // console.log("projectFIlename:", downloadLink.download);
+            // downloadLink.click();//simulate a click
+            // window.URL.revokeObjectURL(url);//destroy the reference that was used previously
+            // document.body.removeChild(downloadLink);//remove the previously added downloadLink from the DOM
         });
     }
     render () {
@@ -70,14 +91,14 @@ const getProjectFilename = (curTitle, defaultTitle) => {
     return `${filenameTitle.substring(0, 100)}.sb3`;
 };
 
-SB3Downloader.propTypes = {
+SaveToCloud.propTypes = {
     children: PropTypes.func,
     className: PropTypes.string,
     onSaveFinished: PropTypes.func,
     projectFilename: PropTypes.string,
     saveProjectSb3: PropTypes.func
 };
-SB3Downloader.defaultProps = {
+SaveToCloud.defaultProps = {
     className: ''
 };
 
@@ -89,4 +110,4 @@ const mapStateToProps = state => ({
 export default connect(
     mapStateToProps,
     () => ({}) // omit dispatch prop
-)(SB3Downloader);
+)(SaveToCloud);
