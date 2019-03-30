@@ -61,8 +61,8 @@ class SB3Downloader extends React.Component {
 }
 
 const getProjectFilename = (curTitle, defaultTitle) => {
-    console.log("curTitile:", curTitle);
-    console.log("defaultTitle:", defaultTitle);
+    // console.log("curTitile:", curTitle);
+    // console.log("defaultTitle:", defaultTitle);
     let filenameTitle = curTitle;
     if (!filenameTitle || filenameTitle.length === 0) {
         filenameTitle = defaultTitle;

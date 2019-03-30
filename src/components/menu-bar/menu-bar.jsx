@@ -150,6 +150,7 @@ class MenuBar extends React.Component {
     }
     handleClickNew () {
         let readyToReplaceProject = true;
+        console.log("props from menur-bar:",this.props);
         // if the project is dirty, and user owns the project, we will autosave.
         // but if they are not logged in and can't save, user should consider
         // downloading or logging in first.
@@ -352,16 +353,10 @@ class MenuBar extends React.Component {
                                     <MenuSection>
                                         {this.props.canSave ? (
 
-                                            <SaveToCloud>{(className, downloadProject) => (
-                                                <MenuItem
-                                                    className={className}
-                                                     onClick={this.handleCloseFileMenuAndThen(downloadProject)}
-                                                 >
-                                            <FormattedMessage
-                                                defaultMessage="Save your project"
-                                                description="save to AWS"
-                                                id="saveToAWS"
-                                            />
+                                            <SaveToCloud  title={this.props.projectTitle} author={this.props.username} >
+                                            {(className, downloadProject) => (
+                                                <MenuItem className={className} onClick={this.handleCloseFileMenuAndThen(downloadProject)} >
+                                                <FormattedMessage defaultMessage="Save your project" description="save to AWS" id="saveToAWS" />
                                                 </MenuItem>
                                             )}</SaveToCloud>
 
