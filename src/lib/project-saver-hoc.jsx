@@ -151,9 +151,16 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 });
         }
         createNewProjectToStorage () {
+            console.log("Triggered creating new..");
+            function deepClone(response){
+                return JSON.parse(JSON.stringify(response));
+            }
+
             return this.storeProject(null)
                 .then(response => {
-                    this.props.onCreatedProject(response.id.toString(), this.props.loadingState);
+                    let clone = deepClone(response);
+                    this.props.onCreatedProject(clone.proj.id.toString(), this.props.loadingState);
+                   // this.props.onCreatedProject("1", this.props.loadingState);
                 })
                 .catch(err => {
                     this.props.onShowAlert('creatingError');
@@ -184,7 +191,10 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 title: this.props.reduxProjectTitle
             })
                 .then(response => {
-                    this.props.onCreatedProject(response.id.toString(), this.props.loadingState);
+                    let parse = JSON.parse(JSON.stringify(response));
+                    let id = parse.id.toString();
+                    this.props.onCreatedProject(id, this.props.loadingState);
+                   // this.props.onCreatedProject("1", this.props.loadingState);
                     this.props.onShowRemixSuccessAlert();
                 })
                 .catch(err => {
@@ -199,21 +209,25 @@ const ProjectSaverHOC = function (WrappedComponent) {
          * @param {?object} requestParams - object of params to add to request body
          */
         storeProject (projectId, requestParams) {
+            console.log("This is projectId",projectId);
+            console.log("This is requestParams",requestParams);
             requestParams = requestParams || {};
             this.clearAutoSaveTimeout();
-            return Promise.all(this.props.vm.assets
-                .filter(asset => !asset.clean)
-                .map(
-                    asset => storage.store(
-                        asset.assetType,
-                        asset.dataFormat,
-                        asset.data,
-                        asset.assetId
-                    ).then(
-                        () => (asset.clean = true)
-                    )
-                )
-            ).then(() => {
+            // return Promise.all(this.props.vm.assets.filter(asset => !asset.clean).map(asset => storage.store(
+            //             asset.assetType,
+            //             asset.dataFormat,
+            //             asset.data,
+            //             asset.assetId
+            //         ).then(
+            //             () => (asset.clean = true)
+            //         )
+            //     )
+            // )
+
+
+            return new Promise(resolve => {
+                resolve(console.log("what you looking at son?"))
+            }).then(() => {
                 const opts = {
                     body: this.props.vm.toJSON(),
                     // If we set json:true then the body is double-stringified, so don't
@@ -222,18 +236,22 @@ const ProjectSaverHOC = function (WrappedComponent) {
                     },
                     withCredentials: true
                 };
+                console.log("inside first then");
                 const creatingProject = projectId === null || typeof projectId === 'undefined';
                 let qs = queryString.stringify(requestParams);
                 if (qs) qs = `?${qs}`;
                 if (creatingProject) {
+                    console.log("creating project is true");
                     Object.assign(opts, {
                         method: 'post',
-                        url: `${storage.projectHost}/${qs}`
+                        //url: `${storage.projectHost}/${qs}`
+                        url: `/projectsInfo/`
                     });
-                } else {
+                } 
+                else {
                     Object.assign(opts, {
                         method: 'put',
-                        url: `${storage.projectHost}/${projectId}${qs}`
+                        url: `/projectsInfo/${projectId}`
                     });
                 }
                 return new Promise((resolve, reject) => {
@@ -242,28 +260,37 @@ const ProjectSaverHOC = function (WrappedComponent) {
                         let body;
                         try {
                             // Since we didn't set json: true, we have to parse manually
+                      
                             body = JSON.parse(response.body);
+                         
                         } catch (e) {
                             return reject(e);
                         }
-                        body.id = projectId;
-                        if (creatingProject) {
-                            body.id = body['content-name'];
-                        }
-                        resolve(body);
+                        //body.id = projectId;
+                        // if (creatingProject) {
+                        //     body.id = body['content-name'];
+                        // }
+
+                        let _body = JSON.parse(JSON.stringify(body))
+                       
+                        resolve(_body);
                     });
                 });
             })
                 .then(response => {
+                
                     this.props.onSetProjectUnchanged();
-                    const id = response.id.toString();
-                    if (id && this.props.onUpdateProjectThumbnail) {
-                        this.storeProjectThumbnail(id);
-                    }
-                    return response;
+                   // const id = response.id.toString();
+                    // if (id && this.props.onUpdateProjectThumbnail) {
+                    //     this.storeProjectThumbnail(id);
+                    // }
+                    let _response = JSON.parse(JSON.stringify(response))
+                    return _response;
                 })
                 .catch(err => {
                     log.error(err);
+                    console.log(err);
+                    console.log("got error at line 283");
                     throw err; // pass the error up the chain
                 });
         }

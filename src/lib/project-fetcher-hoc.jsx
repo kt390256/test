@@ -216,9 +216,9 @@ const ProjectFetcherHOC = function (WrappedComponent) {
             bindAll(this, [
                 'fetchProject'
             ]);
-            storage.setProjectHost(props.projectHost);
-            storage.setAssetHost(props.assetHost);
-            storage.setTranslatorFunction(props.intl.formatMessage);
+           // storage.setProjectHost(props.projectHost);
+            //storage.setAssetHost(props.assetHost);
+           // storage.setTranslatorFunction(props.intl.formatMessage);
             // props.projectId might be unset, in which case we use our default;
             // or it may be set by an even higher HOC, and passed to us.
             // Either way, we now know what the initial projectId should be, so
@@ -239,6 +239,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 storage.setAssetHost(this.props.assetHost);
             }
             if (this.props.isFetchingWithId && !prevProps.isFetchingWithId) {
+                console.log("This is props ",this.props);
                 this.fetchProject(this.props.reduxProjectId, this.props.loadingState);
             }
             if (this.props.isShowingProject && !prevProps.isShowingProject) {
@@ -251,11 +252,12 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         fetchProject (projectId, loadingState) {
 
             //if(projectId!=0){
+            console.log("This is loading state", loadingState);
+
            xhr({
               method: 'get',
               host: '',
-              uri: `/temp/${projectId}`
-          
+              uri: `/project-data/${projectId}`
           }, (err, response) => {
             if(err) console.log(`err from ${__dir} line 78`,err);
               //console.log("unparse-succesfful");
@@ -333,10 +335,10 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         reduxProjectId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
         setProjectId: PropTypes.func
     };
-    ProjectFetcherComponent.defaultProps = {
-        assetHost: 'https://assets.scratch.mit.edu',
-        projectHost: 'https://projects.scratch.mit.edu'
-    };
+    // ProjectFetcherComponent.defaultProps = {
+    //     assetHost: 'https://assets.scratch.mit.edu',
+    //     projectHost: 'https://projects.scratch.mit.edu'
+    // };
 
     const mapStateToProps = state => ({
         isCreatingNew: getIsCreatingNew(state.scratchGui.projectState.loadingState),

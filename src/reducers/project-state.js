@@ -348,6 +348,8 @@ const reducer = function (state, action) {
             LoadingState.LOADING_VM_NEW_DEFAULT,
             LoadingState.LOADING_VM_WITH_ID
         ].includes(state.loadingState)) {
+            console.log("fatal loading error");
+            console.log(state.loadingState);
             return Object.assign({}, state, {
                 loadingState: LoadingState.ERROR,
                 error: action.error
@@ -418,13 +420,13 @@ const onFetchedProjectData = (projectData, loadingState) => {
     //console.log("inside onFetchedProjectData:",projectData);
     switch (loadingState) {
     case LoadingState.FETCHING_WITH_ID:
-    //console.log("case fetching with id");
+    console.log("case fetching with id");
         return {
             type: DONE_FETCHING_WITH_ID,
             projectData: projectData
         };
     case LoadingState.FETCHING_NEW_DEFAULT:
-   // console.log("case fetching new default");
+    console.log("case fetching new default");
         return {
             type: DONE_FETCHING_DEFAULT,
             projectData: projectData

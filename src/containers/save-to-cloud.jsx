@@ -29,7 +29,6 @@ class SaveToCloud extends React.Component {
     }
     downloadProject () {
 
-        console.log("from saveToCLoud",this.props)
 
         const downloadLink = document.createElement('a');
         document.body.appendChild(downloadLink);
@@ -46,21 +45,19 @@ class SaveToCloud extends React.Component {
 
             let formData = new FormData();
             formData.append('myFile', content, "someshit.sb3");
+            console.log(formData);
 
             axios.post('/save-to-cloud', formData, {})
             .then(res => {console.log(res)})
             .catch(err =>{console.log(err)})
 
-            axios.post('/save-project-info', projectInfo,{})
-            .then(res => console.log(res))
-            .catch(err => {console.log(err)})
+            
+
+            // axios.post('/save-project-info', projectInfo,{})
+            // .then(res => console.log(res))
+            // .catch(err => {console.log(err)})
 
 
-            // Use special ms version if available to get it working on Edge.
-            if (navigator.msSaveOrOpenBlob) {
-                navigator.msSaveOrOpenBlob(content, this.props.projectFilename);
-                return;
-            }
 
         });
     }
