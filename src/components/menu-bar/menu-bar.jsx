@@ -356,7 +356,7 @@ class MenuBar extends React.Component {
                                             <SaveToCloud  title={this.props.projectTitle} author={this.props.username} >
                                             {(className, downloadProject) => (
                                                 <MenuItem className={className} onClick={this.handleCloseFileMenuAndThen(downloadProject)} >
-                                                <FormattedMessage defaultMessage="Save your project" description="save to AWS" id="saveToAWS" />
+                                                <FormattedMessage defaultMessage="Save your project" description="save to AWS" id="saveToAWS" name="myFile" />
                                                 </MenuItem>
                                             )}</SaveToCloud>
 

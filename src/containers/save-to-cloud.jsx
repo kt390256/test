@@ -43,8 +43,17 @@ class SaveToCloud extends React.Component {
                 author: this.props.author
             }
 
+            let cur_url = window.location.href;
+            let _split = cur_url.split("/");
+            let project_id_index = _split[_split.length - 2] == 'editor' ? _split.length - 3 : _split.length - 2;
+            let project_id = _split[project_id_index];
+            console.log(_split);
+            console.log(project_id);
+
             let formData = new FormData();
-            formData.append('myFile', content, "someshit.sb3");
+           
+            //formData.append('myFile', content, `${this.props.username}-${project_id}`);
+            formData.append('myFile', content, `${project_id}`);
             console.log(formData);
 
             axios.post('/save-to-cloud', formData, {})
@@ -91,6 +100,7 @@ SaveToCloud.defaultProps = {
 };
 
 const mapStateToProps = state => ({
+    username: state.session.session.user.username,
     saveProjectSb3: state.scratchGui.vm.saveProjectSb3.bind(state.scratchGui.vm),
     projectFilename: getProjectFilename(state.scratchGui.projectTitle, projectTitleInitialState)
 });

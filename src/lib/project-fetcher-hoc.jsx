@@ -251,8 +251,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         }
         fetchProject (projectId, loadingState) {
 
-            //if(projectId!=0){
-            console.log("This is loading state", loadingState);
+            console.log("fetching project hit",this.props.projectInfo);
 
            xhr({
               method: 'get',
@@ -341,6 +340,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
     // };
 
     const mapStateToProps = state => ({
+        projectInfo:state,
         isCreatingNew: getIsCreatingNew(state.scratchGui.projectState.loadingState),
         isFetchingWithId: getIsFetchingWithId(state.scratchGui.projectState.loadingState),
         isLoadingProject: getIsLoading(state.scratchGui.projectState.loadingState),

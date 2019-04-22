@@ -14,5 +14,4 @@ npm-*
 /.opt-in
 
 # generated translation files
-/translations
-/locale
+
