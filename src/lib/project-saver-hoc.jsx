@@ -236,7 +236,8 @@ const ProjectSaverHOC = function (WrappedComponent) {
                     },
                     withCredentials: true
                 };
-                console.log("inside first then");
+            
+                
                 const creatingProject = projectId === null || typeof projectId === 'undefined';
                 let qs = queryString.stringify(requestParams);
                 if (qs) qs = `?${qs}`;
@@ -249,6 +250,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                     });
                 } 
                 else {
+                    console.log("Creating project isn't true");
                     Object.assign(opts, {
                         method: 'put',
                         url: `/projectsInfo/${projectId}`

@@ -217,7 +217,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 'fetchProject'
             ]);
            // storage.setProjectHost(props.projectHost);
-            //storage.setAssetHost(props.assetHost);
+            storage.setAssetHost(props.assetHost);
            // storage.setTranslatorFunction(props.intl.formatMessage);
             // props.projectId might be unset, in which case we use our default;
             // or it may be set by an even higher HOC, and passed to us.
@@ -251,45 +251,41 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         }
         fetchProject (projectId, loadingState) {
 
-            console.log("fetching project hit",this.props.projectInfo);
+         
 
-           xhr({
-              method: 'get',
-              host: '',
-              uri: `/project-data/${projectId}`
-          }, (err, response) => {
-            if(err) console.log(`err from ${__dir} line 78`,err);
-              //console.log("unparse-succesfful");
-             // let temp = body.getJSONObject("projectData").getJSONObject("data");
-              let content = JSON.parse(response.body);
-             // console.log(response.body);
-
-              let input = content.projectData == null ? new Uint8Array(content.data) 
-                                                      : new Uint8Array(content.projectData.data.data);
-
-              //console.log(input);
-              return this.props.onFetchedProjectData(input, loadingState);
-          })
-           //}
-            //else{
-            //     return storage
-            //     .load(storage.AssetType.Project, projectId, storage.DataFormat.JSON)
-            //     .then(projectAsset => {
-            //         //console.log(projectId);
-            //        // console.log("THis fucking shit inside hoc is called too");
-            //         if (projectAsset) {
-            //             this.props.onFetchedProjectData(projectAsset.data, loadingState);
-            //         } else {
-            //             // Treat failure to load as an error
-            //             // Throw to be caught by catch later on
-            //             throw new Error('Could not find project');
-            //         }
-            //     })
-            //     .catch(err => {
-            //         this.props.onError(err);
-            //         log.error(err);
-            //     });
-            // }
+            if(projectId != 0){
+                console.log("project id presented");
+                xhr({
+                    method: 'get',
+                    host: '',
+                    uri: `/project-data/${projectId}`
+                    }, (err, response) => {
+                    if(err) console.log(`err from ${__dir} line 78`,err);
+                    let content = JSON.parse(response.body);
+                    let input = content.projectData == null ? new Uint8Array(content.data) 
+                                                            : new Uint8Array(content.projectData.data.data);
+                    return this.props.onFetchedProjectData(input, loadingState);
+                })
+           }
+            else{
+                return storage
+                .load(storage.AssetType.Project, projectId, storage.DataFormat.JSON)
+                .then(projectAsset => {
+                
+                   // console.log("THis fucking shit inside hoc is called too");
+                    if (projectAsset) {
+                        this.props.onFetchedProjectData(projectAsset.data, loadingState);
+                    } else {
+                        // Treat failure to load as an error
+                        // Throw to be caught by catch later on
+                        throw new Error('Could not find project');
+                    }
+                })
+                .catch(err => {
+                    this.props.onError(err);
+                    log.error(err);
+                });
+            }
           
        }
         render () {

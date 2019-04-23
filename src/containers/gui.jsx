@@ -49,6 +49,7 @@ const messages = defineMessages({
 
 class GUI extends React.Component {
     componentDidMount () {
+
         setIsScratchDesktop(this.props.isScratchDesktop);
         this.setReduxTitle(this.props.projectTitle);
         this.props.onStorageInit(storage);
@@ -96,7 +97,7 @@ class GUI extends React.Component {
             loadingStateVisible,
             ...componentProps
         } = this.props;
-  
+
         return (
             <GUIComponent loading={fetchingProject || isLoading || loadingStateVisible}
                           {...componentProps}>
