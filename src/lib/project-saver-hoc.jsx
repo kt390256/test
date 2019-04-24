@@ -273,10 +273,10 @@ const ProjectSaverHOC = function (WrappedComponent) {
                         .then(res => {console.log(res)})
                         .catch(err =>{console.log(err)})
                     });
-                    Object.assign(opts, {
-                        method: 'put',
-                        url: `/projectsInfo/${projectId}`
-                    });
+                    // Object.assign(opts, {
+                    //     method: 'put',
+                    //     url: `/projectsInfo/${projectId}`
+                    // });
                 }
                 return new Promise((resolve, reject) => {
                     xhr(opts, (err, response) => {
