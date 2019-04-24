@@ -5,6 +5,7 @@ import queryString from 'query-string';
 import {connect} from 'react-redux';
 import VM from 'scratch-vm';
 import xhr from 'xhr';
+import axios from 'axios';
 
 import log from '../lib/log';
 import storage from '../lib/storage';
@@ -160,7 +161,17 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 .then(response => {
                     let clone = deepClone(response);
                     this.props.onCreatedProject(clone.proj.id.toString(), this.props.loadingState);
-                   // this.props.onCreatedProject("1", this.props.loadingState);
+                  
+                   this.props.saveProjectSb3().then(content => {
+                    let formData = new FormData();
+                    let projectId = parseInt(this.props.reduxProjectId);
+                    formData.append('myFile', content, projectId);
+                    axios.post('/save-to-cloud', formData, {})
+                    .then(res => {console.log(res)})
+                    .catch(err =>{console.log(err)})
+                });
+
+
                 })
                 .catch(err => {
                     this.props.onShowAlert('creatingError');
@@ -209,8 +220,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
          * @param {?object} requestParams - object of params to add to request body
          */
         storeProject (projectId, requestParams) {
-            console.log("This is projectId",projectId);
-            console.log("This is requestParams",requestParams);
+           
             requestParams = requestParams || {};
             this.clearAutoSaveTimeout();
             // return Promise.all(this.props.vm.assets.filter(asset => !asset.clean).map(asset => storage.store(
@@ -243,6 +253,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 if (qs) qs = `?${qs}`;
                 if (creatingProject) {
                     console.log("creating project is true");
+                    
                     Object.assign(opts, {
                         method: 'post',
                         //url: `${storage.projectHost}/${qs}`
@@ -250,7 +261,18 @@ const ProjectSaverHOC = function (WrappedComponent) {
                     });
                 } 
                 else {
-                    console.log("Creating project isn't true");
+                    Object.assign(opts, {
+                        method: 'put',
+                        url: `/projectsInfo/${projectId}`
+                    });
+                    this.props.saveProjectSb3().then(content => {
+                        let formData = new FormData();
+                        let projectId = parseInt(this.props.reduxProjectId);
+                        formData.append('myFile', content, projectId);
+                        axios.post('/save-to-cloud', formData, {})
+                        .then(res => {console.log(res)})
+                        .catch(err =>{console.log(err)})
+                    });
                     Object.assign(opts, {
                         method: 'put',
                         url: `/projectsInfo/${projectId}`
@@ -406,6 +428,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
         const loadingState = state.scratchGui.projectState.loadingState;
         const isShowingWithId = getIsShowingWithId(loadingState);
         return {
+            saveProjectSb3: state.scratchGui.vm.saveProjectSb3.bind(state.scratchGui.vm),
             autoSaveTimeoutId: state.scratchGui.timeout.autoSaveTimeoutId,
             isAnyCreatingNewState: getIsAnyCreatingNewState(loadingState),
             isCreatingCopy: getIsCreatingCopy(loadingState),

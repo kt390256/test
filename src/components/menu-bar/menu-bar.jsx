@@ -217,6 +217,7 @@ class MenuBar extends React.Component {
             this.props.onClickLanguage(e);
         }
     }
+
     restoreOptionMessage (deletedItem) {
         switch (deletedItem) {
         case 'Sprite':

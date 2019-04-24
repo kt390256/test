@@ -1,5 +1,5 @@
 {
-  "_from": "git+ssh://git@github.com/kt390256/test.git",
+  "_from": "git://github.com/kt390256/test.git",
   "_id": "scratch-gui@0.1.0",
   "_inBundle": false,
   "_integrity": "",
@@ -7,19 +7,19 @@
   "_phantomChildren": {},
   "_requested": {
     "type": "git",
-    "raw": "scratch-gui@git+ssh://git@github.com/kt390256/test.git",
+    "raw": "scratch-gui@git://github.com/kt390256/test.git",
     "name": "scratch-gui",
     "escapedName": "scratch-gui",
-    "rawSpec": "git+ssh://git@github.com/kt390256/test.git",
-    "saveSpec": "git+ssh://git@github.com/kt390256/test.git",
-    "fetchSpec": "ssh://git@github.com/kt390256/test.git",
+    "rawSpec": "git://github.com/kt390256/test.git",
+    "saveSpec": "git://github.com/kt390256/test.git",
+    "fetchSpec": "git://github.com/kt390256/test.git",
     "gitCommittish": null
   },
   "_requiredBy": [
     "#DEV:/"
   ],
-  "_resolved": "git+ssh://git@github.com/kt390256/test.git#3ae8423ea27f02ab6fe628edb07c4ef4317084d2",
-  "_spec": "scratch-gui@git+ssh://git@github.com/kt390256/test.git",
+  "_resolved": "git://github.com/kt390256/test.git#5286569b1d0cacdebb5e32c925e18cda95972b09",
+  "_spec": "scratch-gui@git://github.com/kt390256/test.git",
   "_where": "/home/csc415/Desktop/Apps/Scratch/Main/scratch-www",
   "author": {
     "name": "Massachusetts Institute of Technology"
@@ -28,6 +28,9 @@
     "url": "https://github.com/LLK/scratch-gui/issues"
   },
   "bundleDependencies": false,
+  "dependencies": {
+    "axios": "^0.18.0"
+  },
   "deprecated": false,
   "description": "GraphicaL User Interface for creating and running Scratch 3.0 projects",
   "devDependencies": {
@@ -166,8 +169,5 @@
     "test:unit": "jest test[\\\\/]unit",
     "watch": "webpack --progress --colors --watch"
   },
-  "version": "0.1.0",
-  "dependencies": {
-    "axios": "^0.18.0"
-  }
+  "version": "0.1.0"
 }
