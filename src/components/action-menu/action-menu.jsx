@@ -3,6 +3,7 @@ import React from 'react';
 import classNames from 'classnames';
 import bindAll from 'lodash.bindall';
 import ReactTooltip from 'react-tooltip';
+import {connect} from 'react-redux';
 
 import styles from './action-menu.css';
 
@@ -27,6 +28,7 @@ class ActionMenu extends React.Component {
         this.mainTooltipId = `tooltip-${Math.random()}`;
     }
     componentDidMount () {
+    
         // Touch start on the main button is caught to trigger open and not click
         this.buttonRef.addEventListener('touchstart', this.handleTouchStart);
         // Touch start on document is used to trigger close if it is outside
@@ -188,6 +190,8 @@ class ActionMenu extends React.Component {
     }
 }
 
+
+
 ActionMenu.propTypes = {
     className: PropTypes.string,
     img: PropTypes.string,
@@ -204,4 +208,14 @@ ActionMenu.propTypes = {
     tooltipPlace: PropTypes.string
 };
 
-export default ActionMenu;
+
+const mapStateToprops = state => ({
+    stuff: state
+})
+
+const mapDispatchToProps = dispatch => ({
+
+})
+
+
+export default connect(mapStateToprops,mapDispatchToProps)(ActionMenu);

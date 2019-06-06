@@ -111,6 +111,11 @@ export default defineMessages({
         description: 'Tag for filtering a library for art',
         id: 'gui.libraryTags.art'
     },
+    premium: {
+        defaultMessage: "Premium",
+        description: "Tag for Ponycode Premium",
+        id: 'gui.libraryTags.premium'
+    },
     games: {
         defaultMessage: 'Games',
         description: 'Tag for filtering a library for games',

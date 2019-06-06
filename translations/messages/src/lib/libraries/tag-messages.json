@@ -110,6 +110,11 @@
     "defaultMessage": "Art"
   },
   {
+    "id": "gui.libraryTags.premium",
+    "description": "Tag for Ponycode Premium",
+    "defaultMessage": "Premium"
+  },
+  {
     "id": "gui.libraryTags.games",
     "description": "Tag for filtering a library for games",
     "defaultMessage": "Games"
