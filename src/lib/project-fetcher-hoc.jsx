@@ -250,10 +250,9 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         }
         fetchProject (projectId, loadingState) {
 
-         
+            console.log("(from project-fetcher-hoc)" + document.referrer)
 
             if(projectId != 0){
-                console.log("project id presented");
                 xhr({
                     method: 'get',
                     host: '',

@@ -236,7 +236,7 @@ const ProjectSaverHOC = function (WrappedComponent) {
 
 
             return new Promise(resolve => {
-                resolve(console.log("what you looking at son?"))
+                resolve(console.log(""))
             }).then(() => {
                 const opts = {
                     body: this.props.vm.toJSON(),
@@ -251,19 +251,29 @@ const ProjectSaverHOC = function (WrappedComponent) {
                 const creatingProject = projectId === null || typeof projectId === 'undefined';
                 let qs = queryString.stringify(requestParams);
                 if (qs) qs = `?${qs}`;
+                
+                let competition = false;
+
                 if (creatingProject) {
-                    console.log("creating project is true");
-                    
+           
+
+                    //this is to judge whether the user is making a projet throught competition or just regular
+                    document.referrer.indexOf("competition") != -1 ? competition = true : competition = false;
+
                     Object.assign(opts, {
                         method: 'post',
                         //url: `${storage.projectHost}/${qs}`
-                        url: `/projectsInfo/`
+                        url: `/projectsInfo/?competition=${competition}`,
+                        
                     });
                 } 
                 else {
+            
+                    document.referrer.indexOf("competition") != -1 ? competition = true : competition = false;
                     Object.assign(opts, {
                         method: 'put',
-                        url: `/projectsInfo/${projectId}`
+                        url: `/projectsInfo/${projectId}?competition=${competition}`,
+                      
                     });
                     this.props.saveProjectSb3().then(content => {
                         let formData = new FormData();

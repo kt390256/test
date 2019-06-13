@@ -371,7 +371,6 @@ class LibraryComponent extends React.Component {
         this.setState({filterQuery: ''});
     }
     getFilteredData () {
-        
         if (this.state.selectedTag === 'all') {
             if (!this.state.filterQuery) return this.props.data;
             return this.props.data.filter(dataItem => (

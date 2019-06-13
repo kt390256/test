@@ -70,7 +70,8 @@ const VideoStep = ({video, dragging}) => (
             frameBorder="0"
             height="338"
             scrolling="no"
-            src={`https://fast.wistia.net/embed/iframe/${video}?seo=false&videoFoam=true`}
+            //src={`https://fast.wistia.net/embed/iframe/${video}?seo=false&videoFoam=true`}
+            src={"https://www.youtube.com/embed/tgbNymZ7vqY"}
             title="📹"
             width="600"
         />

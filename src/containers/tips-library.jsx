@@ -1,6 +1,6 @@
 import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, {Fragment} from 'react';
 import {injectIntl, intlShape, defineMessages} from 'react-intl';
 
 import decksLibraryContent from '../lib/libraries/decks/index.jsx';
@@ -32,6 +32,7 @@ const messages = defineMessages({
 class TipsLibrary extends React.PureComponent {
     constructor (props) {
         super(props);
+        console.log("you are in the video section")
         bindAll(this, [
             'handleItemSelect'
         ]);
@@ -56,6 +57,7 @@ class TipsLibrary extends React.PureComponent {
         if (item.requiredProjectId && (item.requiredProjectId !== this.props.projectId)) {
             console.log("this is being called in tips-library")
             const urlParams = `/projects/${item.requiredProjectId}/editor?tutorial=${item.urlId}`;
+            consoel.log("this is urlParams",urlParams)
             return window.open(window.location.origin + urlParams, '_blank');
         }
 
@@ -77,19 +79,24 @@ class TipsLibrary extends React.PureComponent {
                 requiredProjectId: decksLibraryContent[id].requiredProjectId,
                 hidden: decksLibraryContent[id].hidden || false
             }));
-
+            console.log("this is decksLibraryThumbnailData",decksLibraryThumbnailData);
+            console.log("this is state", this.props.state);
         if (!this.props.visible) return null;
         return (
-            <LibraryComponent
-                filterable
-                data={decksLibraryThumbnailData}
-                id="tipsLibrary"
-                tags={tutorialTags}
-                title={this.props.intl.formatMessage(messages.tipsLibraryTitle)}
-                visible={this.props.visible}
-                onItemSelected={this.handleItemSelect}
-                onRequestClose={this.props.onRequestClose}
-            />
+            <Fragment>
+                <h1>this is shit</h1>
+                <LibraryComponent
+                    filterable
+                    data={decksLibraryThumbnailData}
+                    id="tipsLibrary"
+                    tags={tutorialTags}
+                    title={this.props.intl.formatMessage(messages.tipsLibraryTitle)}
+                    visible={this.props.visible}
+                    onItemSelected={this.handleItemSelect}
+                    onRequestClose={this.props.onRequestClose}
+                />
+                <h1>this is shit!!!!!!!!!</h1>
+            </Fragment>
         );
     }
 }
@@ -103,6 +110,7 @@ TipsLibrary.propTypes = {
 };
 
 const mapStateToProps = state => ({
+    state: state,
     visible: state.scratchGui.modals.tipsLibrary,
     projectId: state.scratchGui.projectState.projectId
 });
