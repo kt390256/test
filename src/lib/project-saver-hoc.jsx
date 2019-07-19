@@ -247,33 +247,25 @@ const ProjectSaverHOC = function (WrappedComponent) {
                     withCredentials: true
                 };
             
-                
+                console.log("this is referrer",document.referrer)
                 const creatingProject = projectId === null || typeof projectId === 'undefined';
                 let qs = queryString.stringify(requestParams);
+                const competition_url = document.referrer;
+                const competition = competition_url.slice(competition_url.indexOf('=') + 1, competition_url.length);
                 if (qs) qs = `?${qs}`;
-                
-                let competition = false;
-
                 if (creatingProject) {
-           
-
-                    //this is to judge whether the user is making a projet throught competition or just regular
-                    document.referrer.indexOf("competition") != -1 ? competition = true : competition = false;
-
+                  
+                    
                     Object.assign(opts, {
                         method: 'post',
                         //url: `${storage.projectHost}/${qs}`
-                        url: `/projectsInfo/?competition=${competition}`,
-                        
+                        url: `/projectsInfo/?competition=${competition}`
                     });
                 } 
                 else {
-            
-                    document.referrer.indexOf("competition") != -1 ? competition = true : competition = false;
                     Object.assign(opts, {
                         method: 'put',
-                        url: `/projectsInfo/${projectId}?competition=${competition}`,
-                      
+                        url: `/projectsInfo/${projectId}`
                     });
                     this.props.saveProjectSb3().then(content => {
                         let formData = new FormData();

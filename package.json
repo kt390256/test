@@ -18,7 +18,7 @@
   "_requiredBy": [
     "#DEV:/"
   ],
-  "_resolved": "git://github.com/kt390256/test.git#5286569b1d0cacdebb5e32c925e18cda95972b09",
+  "_resolved": "git://github.com/kt390256/test.git#e7dfdab31fb00c3a2baf899f3bc6d71f55ddb370",
   "_spec": "scratch-gui@git://github.com/kt390256/test.git",
   "_where": "/home/csc415/Desktop/Apps/Scratch/Main/scratch-www",
   "author": {

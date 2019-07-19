@@ -1,7 +1,6 @@
 [
   {
     "id": "gui.unsupportedBrowser.label",
-    "description": "",
     "defaultMessage": "Browser is not supported"
   },
   {
