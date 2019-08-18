@@ -64,21 +64,21 @@ const VideoStep = ({video, dragging}) => (
         {dragging ? (
             <div className={styles.videoCover} />
         ) : null}
-        <iframe
+        {/* <iframe
             allowFullScreen
             allowTransparency="true"
             frameBorder="0"
             height="338"
             scrolling="no"
-            src={`https://fast.wistia.net/embed/iframe/${video}?seo=false&videoFoam=true`}
+            //src={`https://fast.wistia.net/embed/iframe/${video}?seo=false&videoFoam=true`}
             //src={"https://www.youtube.com/embed/tgbNymZ7vqY"}
             title="📹"
             width="600"
-        />
-        <script
+        /> */}
+        {/* <script
             async
             src="https://fast.wistia.net/assets/external/E-v1.js"
-        />
+        /> */}
     </div>
 );
 
@@ -210,7 +210,7 @@ PreviewsStep.propTypes = {
     onShowAll: PropTypes.func.isRequired
 };
 
-const Cards = props => {
+let Cards = props => {
     const {
         activeDeckId,
         content,
@@ -245,52 +245,53 @@ const Cards = props => {
     const steps = content[activeDeckId].steps;
 
     return (
-        <Draggable
-            bounds="parent"
-            position={{x: x, y: y}}
-            onDrag={onDrag}
-            onStart={onStartDrag}
-            onStop={onEndDrag}
-        >
-            <div className={styles.cardContainer}>
-                <div className={styles.card}>
-                    <CardHeader
-                        step={step}
-                        totalSteps={steps.length}
-                        onCloseCards={onCloseCards}
-                        onShowAll={onShowAll}
-                    />
-                    <div className={styles.stepBody}>
-                        {steps[step].deckIds ? (
-                            <PreviewsStep
-                                content={content}
-                                deckIds={steps[step].deckIds}
-                                onActivateDeckFactory={onActivateDeckFactory}
-                                onShowAll={onShowAll}
-                            />
-                        ) : (
-                            steps[step].video ? (
-                                <VideoStep
-                                    dragging={dragging}
-                                    video={translateVideo(steps[step].video, locale)}
-                                />
-                            ) : (
-                                <ImageStep
-                                    image={steps[step].image}
-                                    title={steps[step].title}
-                                />
-                            )
-                        )}
-                        {steps[step].trackingPixel && steps[step].trackingPixel}
-                    </div>
-                    <NextPrevButtons
-                        isRtl={isRtl}
-                        onNextStep={step < steps.length - 1 ? onNextStep : null}
-                        onPrevStep={step > 0 ? onPrevStep : null}
-                    />
-                </div>
-            </div>
-        </Draggable>
+        // <Draggable
+        //     bounds="parent"
+        //     position={{x: x, y: y}}
+        //     onDrag={onDrag}
+        //     onStart={onStartDrag}
+        //     onStop={onEndDrag}
+        // >
+        //     <div className={styles.cardContainer}>
+        //         <div className={styles.card}>
+        //             <CardHeader
+        //                 step={step}
+        //                 totalSteps={steps.length}
+        //                 onCloseCards={onCloseCards}
+        //                 onShowAll={onShowAll}
+        //             />
+        //             <div className={styles.stepBody}>
+        //                 {steps[step].deckIds ? (
+        //                     <PreviewsStep
+        //                         content={content}
+        //                         deckIds={steps[step].deckIds}
+        //                         onActivateDeckFactory={onActivateDeckFactory}
+        //                         onShowAll={onShowAll}
+        //                     />
+        //                 ) : (
+        //                     steps[step].video ? (
+        //                         <VideoStep
+        //                             dragging={dragging}
+        //                             video={translateVideo(steps[step].video, locale)}
+        //                         />
+        //                     ) : (
+        //                         <ImageStep
+        //                             image={steps[step].image}
+        //                             title={steps[step].title}
+        //                         />
+        //                     )
+        //                 )}
+        //                 {steps[step].trackingPixel && steps[step].trackingPixel}
+        //             </div>
+        //             <NextPrevButtons
+        //                 isRtl={isRtl}
+        //                 onNextStep={step < steps.length - 1 ? onNextStep : null}
+        //                 onPrevStep={step > 0 ? onPrevStep : null}
+        //             />
+        //         </div>
+        //     </div>
+        // </Draggable>
+        <span></span>
     );
 };
 
@@ -323,5 +324,6 @@ Cards.propTypes = {
     x: PropTypes.number,
     y: PropTypes.number
 };
+
 
 export default Cards;
