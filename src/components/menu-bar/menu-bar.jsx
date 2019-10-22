@@ -459,7 +459,7 @@ class MenuBar extends React.Component {
                             </MenuBarMenu>
                         </div>
                     </div>
-                    <Divider className={classNames(styles.divider)} />
+                    {/* <Divider className={classNames(styles.divider)} />
                     <div
                         aria-label={this.props.intl.formatMessage(ariaMessages.tutorials)}
                         className={classNames(styles.menuBarItem, styles.hoverable)}
@@ -470,8 +470,8 @@ class MenuBar extends React.Component {
                             src={helpIcon}
                         />
                         <FormattedMessage {...ariaMessages.tutorials} />
-                    </div>
-                    <Divider className={classNames(styles.divider)} />
+                    </div> 
+                    <Divider className={classNames(styles.divider)} />*/}
                     {this.props.canEditTitle ? (
                         <div className={classNames(styles.menuBarItem, styles.growable)}>
                             <MenuBarItemTooltip
